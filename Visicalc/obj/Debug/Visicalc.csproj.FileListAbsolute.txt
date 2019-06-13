@@ -1,0 +1,7 @@
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\bin\Debug\Visicalc.exe.config
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\bin\Debug\Visicalc.exe
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\bin\Debug\Visicalc.pdb
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\obj\Debug\Visicalc.csprojAssemblyReference.cache
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\obj\Debug\Visicalc.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\obj\Debug\Visicalc.exe
+C:\Users\Usuario\Desktop\Programacion-2018\Proyectos\Visicalc\Visicalc\obj\Debug\Visicalc.pdb
