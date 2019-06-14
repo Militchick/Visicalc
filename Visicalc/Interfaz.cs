@@ -5,28 +5,34 @@ namespace Visicalc
 {
     class Interfaz
     {
+
         protected bool salidainter = false;
 
         protected const int altura = 25;
         protected const int ancho = 80;
-        protected int cuentaltura2 = 0;
+        protected int cuentaltura2 = 1;
         protected int cuentanchura2 = 0;
-
-        public void ejecutar()
+        
+        public void Ejecutar()
         {
+
+            Console.SetWindowSize(120, 30);
 
             string[,] tabla = new string[altura, ancho];
 
-            Console.WriteLine("A0");
+            Console.WriteLine("A1");
             Console.WriteLine();
             Console.WriteLine();
 
-            tablas();
+            TablasPreparar();
+
+            Console.WriteLine();
+            Console.WriteLine("Pulsa ESC para salir de la Interfaz");
 
             do
             {
-                cambiacursor();
-                tablas();
+                CambiarTecla();
+                TablasPreparar();
 
                 Console.WriteLine();
                 Console.WriteLine("Pulsa ESC para salir de la Interfaz");
@@ -35,7 +41,10 @@ namespace Visicalc
 
         }
 
-        void tablas()
+        //Se preparan las tablas, añadiendo
+        //los limites de anchura y las anchuras de celdas
+
+        protected void TablasPreparar()
         {
             for (int cuentaltura = 0; 
                 cuentaltura < altura - 4; cuentaltura++)
@@ -66,19 +75,25 @@ namespace Visicalc
                 }
             }
         }
+        
+        //Sirve para pausar durante un tiempo la consola
+        //Usa System.Threading
 
         public static void Pausa(int milisegundos)
         {
             Thread.Sleep(milisegundos);
         }
 
-        void creatablas(int cuentaltura, int cuentanchura,
+        //Aqui se limita las filas (altura) y se dibujan las tablas
+        //Incluyendo las letras mientras la altura sea 0 (la primera linea)
+
+        protected void creatablas(int cuentaltura, int cuentanchura,
             int anchoprimeracelda, int anchocelda)
         {
 
             char columna = 'A';
             
-            for (int alt = 0; alt < cuentanchura; alt++)
+            for (int alt = 0; alt < 22; alt++)
             {
                 for (byte i = 0; i < anchoprimeracelda; i++)
                 {
@@ -151,8 +166,11 @@ namespace Visicalc
             }
         }
           
+        //Se usa para ir mostrando en que casilla se esta actualmente
+        //En la primera linea de la consola, se comprueba la casilla
+        //despues del pulsar un boton
         
-        void cambiacursor()
+        protected void CambiarTecla()
         {
 
             Console.WriteLine();
@@ -162,10 +180,6 @@ namespace Visicalc
             
             string letras = string.Empty;
             
-            //Segunda y Tercera Linea Vacias
-
-            Console.WriteLine();
-            Console.WriteLine();
 
             ConsoleKeyInfo TeclaLeida = Console.ReadKey();
 
@@ -178,7 +192,7 @@ namespace Visicalc
             }
             else if (TeclaLeida.Key == ConsoleKey.UpArrow)
             {
-                if (cuentaltura2 > 0)
+                if (cuentaltura2 > 1)
                 {
                     cuentaltura2--;
                 }
@@ -225,7 +239,8 @@ namespace Visicalc
 
             Console.Write(letras);
             Console.WriteLine(cuentaltura2);
-            
+
+            //Segunda y Tercera Linea Vacias
             Console.WriteLine();
             Console.WriteLine();
             

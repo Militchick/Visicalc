@@ -22,7 +22,7 @@ namespace Visicalc
                 bool seguro = true;
                 casilla[] cas = new casilla[tamanyo];
                 Interfaz inter = new Interfaz();
-                inter.ejecutar();
+                inter.Ejecutar();
                 Console.Clear();
 
                 do
