@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Visicalc
@@ -22,6 +21,9 @@ namespace Visicalc
                 bool guardarsino = true;
                 bool seguro = true;
                 casilla[] cas = new casilla[tamanyo];
+                Interfaz inter = new Interfaz();
+                inter.ejecutar();
+                Console.Clear();
 
                 do
                 {
@@ -42,33 +44,36 @@ namespace Visicalc
 
                             if(contar > 0)
                             {
-                                bool sno = false;
-                                bool sobresno = false;
+                                bool hayCambiosPendientes = false;
+                                bool sihayCambiosPendientes = false;
 
                                 do
                                 {
-                                    Console.Write("Desea sobreescribir los datos?: ");
-                                    string sobre = Console.ReadLine().ToLower();
+                                    Console.Write("Desea sobreescribir " +
+                                        "los datos?: ");
+                                    string sobre = 
+                                        Console.ReadLine().ToLower();
 
                                     switch (sobre)
                                     {
                                         case "si":
                                         case "s":
-                                            sno = true;
-                                            sobresno = true;
+                                            hayCambiosPendientes = true;
+                                            sihayCambiosPendientes = true;
                                             break;
                                         case "no":
                                         case "n":
-                                            sno = true;
+                                            hayCambiosPendientes = true;
                                             break;
                                         default:
-                                            Console.WriteLine("Error, respuesta de si o no");
+                                            Console.WriteLine("Error, " +
+                                                "respuesta de si o no");
                                             break;
                                     }
                                 }
-                                while (sno == false);
+                                while (hayCambiosPendientes == false);
                             
-                                if(sobresno == true)
+                                if(sihayCambiosPendientes == true)
                                 {
                                     contar = 0;
                                 }
@@ -78,29 +83,40 @@ namespace Visicalc
                             Console.Write("Nombre del fichero a cargar?: ");
                             string nombrecargar = Console.ReadLine();
 
-                            StreamReader cargar = File.OpenText(nombrecargar + ".txt");
-
-                            string linea;
-
-                            do
+                            if (File.Exists(nombrecargar))
                             {
-                                linea = cargar.ReadLine();
-                                if(linea != null)
+                                StreamReader cargar =
+                                File.OpenText(nombrecargar + ".txt");
+
+                                string linea;
+
+                                do
                                 {
-                                    string[] partes = linea.Split(' ');
+                                    linea = cargar.ReadLine();
+                                    if (linea != null)
+                                    {
+                                        string[] partes = linea.Split(' ');
 
-                                    cas[contar].nombre = partes[0];
-                                    cas[contar].valor = Convert.ToDouble(partes[1]);
+                                        cas[contar].nombre = partes[0];
+                                        cas[contar].valor =
+                                            Convert.ToDouble(partes[1]);
 
-                                    contar++;
+                                        contar++;
+                                    }
                                 }
+                                while (linea != null);
+
+                                cargar.Close();
+
+                                guardarsino = false;
+                                seguro = false;
                             }
-                            while (linea != null);
-
-                            cargar.Close();
-
-                            guardarsino = false;
-                            seguro = false;
+                            else
+                            {
+                                Console.WriteLine("El archivo " + 
+                                    nombrecargar + ".txt no se puede " +
+                                    "cargar porque no existe");
+                            }
 
                             break;
                         case 2: //Añadir
@@ -111,20 +127,19 @@ namespace Visicalc
                                 cas[contar].nombre = Console.ReadLine();
 
                                 Console.Write("Introduce Valor: ");
-                                cas[contar].valor = Convert.ToDouble(Console.ReadLine());
+                                cas[contar].valor = 
+                                    Convert.ToDouble(Console.ReadLine());
 
 
                                 guardarsino = false;
                                 seguro = false;
+
+                                contar++;
                             }
                             else
                             {
                                 Console.WriteLine("Casillas llenas");
                             }
-
-                            contar++;
-
-
                             break;
 
                         case 3: //Guardar
@@ -132,11 +147,13 @@ namespace Visicalc
                             Console.Write("Nombre del fichero a guardar?: ");
                             string nombreguardar = Console.ReadLine();
 
-                            StreamWriter guardar = File.AppendText(nombreguardar + ".txt");
+                            StreamWriter guardar = File.AppendText
+                                (nombreguardar + ".txt");
 
                             for (int i = 0; i < contar; i++)
                             {
-                                guardar.WriteLine(cas[i].nombre + " " + cas[i].valor);
+                                guardar.WriteLine(cas[i].nombre 
+                                    + " " + cas[i].valor);
                             }
 
                             guardar.Close();
@@ -154,9 +171,12 @@ namespace Visicalc
 
                                 do
                                 {
-                                    Console.WriteLine("Quedan datos por guardar");
-                                    Console.Write("Estas seguro de que quieres salir?: ");
-                                    string segura = Console.ReadLine().ToLower();
+                                    Console.WriteLine("Quedan datos " +
+                                        "por guardar");
+                                    Console.Write("Estas seguro de que " +
+                                        "quieres salir?: ");
+                                    string segura = 
+                                        Console.ReadLine().ToLower();
 
                                     switch (segura)
                                     {
@@ -171,7 +191,8 @@ namespace Visicalc
                                             seguro = false;
                                             break;
                                         default:
-                                            Console.WriteLine("Error, respuesta de si o no");
+                                            Console.WriteLine("Error, " +
+                                                "respuesta de si o no");
                                             break;
                                     }
                                 }
@@ -193,9 +214,17 @@ namespace Visicalc
                 }
                 while (seguro != true);
             }
-            catch (Exception e)
+            catch (PathTooLongException e1)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e1.Message);
+            }
+            catch (IOException e2)
+            {
+                Console.WriteLine(e2.Message);
+            }
+            catch (Exception e3)
+            {
+                Console.WriteLine(e3.Message);
             }
         }
     }
