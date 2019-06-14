@@ -14,7 +14,7 @@ namespace Visicalc
         static void Main(string[] args)
         {
             const int tamanyo = 1000;
-            int opcion = 1;
+            int opcion = 4;
             int contar = 0;
             bool guardarsino = true;
             bool seguro = true;
@@ -259,6 +259,7 @@ namespace Visicalc
                         break;
                     default:
                         Console.WriteLine("Error de Selección");
+                        seguro = false;
                         break;
                 }
 
