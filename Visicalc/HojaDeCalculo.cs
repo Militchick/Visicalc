@@ -19,15 +19,17 @@ namespace Visicalc
             bool guardarsino = true;
             bool seguro = true;
             casilla[] cas = new casilla[tamanyo];
-            Interfaz inter = new Interfaz();
-            inter.Ejecutar();
-            Console.Clear();
 
             do
             {
+                Console.Clear();
+                Interfaz inter = new Interfaz();
+                inter.Ejecutar();
+                Console.Clear();
+
                 Console.WriteLine("1. Cargar desde fichero");
-                Console.WriteLine("2. Añadir un dato");
-                Console.WriteLine("3. Guardar en fichero");
+                //Console.WriteLine("2. Añadir un dato");
+                Console.WriteLine("2. Guardar en fichero");
                 Console.WriteLine("0. Salir");
 
                 Console.WriteLine();
@@ -95,7 +97,7 @@ namespace Visicalc
                         Console.Write("Nombre del fichero a cargar?: ");
                         string nombrecargar = Console.ReadLine();
 
-                        if (File.Exists(nombrecargar))
+                        if (File.Exists(nombrecargar + ".txt"))
                         {
                             StreamReader cargar =
                             File.OpenText(nombrecargar + ".txt");
@@ -109,11 +111,21 @@ namespace Visicalc
                                 {
                                     string[] partes = linea.Split(' ');
 
-                                    cas[contar].nombre = partes[0];
-                                    cas[contar].valor =
-                                        Convert.ToDouble(partes[1]);
+                                        for (int i = 1; i <= 21; i++)
+                                        {
+                                            for (int j = 0; j < 8; j++)
+                                            {
 
-                                    contar++;
+                                                inter.tabla[i, j].nombre = 
+                                                    partes[2];
+                                                inter.tabla[i, j].valor =
+                                                    Convert.ToDouble
+                                                    (partes[3]);
+
+                                                Console.WriteLine(partes[2] + " " + partes[3]);
+
+                                            }
+                                        }
                                 }
                             }
                             while (linea != null);
@@ -144,7 +156,7 @@ namespace Visicalc
                         Console.WriteLine(e3.Message);
                     }
                     break;
-                    case 2: //Añadir
+                    /*case 2: //Añadir
 
                     try
                     {
@@ -178,9 +190,9 @@ namespace Visicalc
                         Console.WriteLine(e2.Message);
                     }
 
-            break;
+            break;*/
 
-                    case 3: //Guardar
+                    case 2: //Guardar
 
                     try
                     {
@@ -190,10 +202,28 @@ namespace Visicalc
                         StreamWriter guardar = File.CreateText
                             (nombreguardar + ".txt");
 
-                        for (int i = 0; i < contar; i++)
+                        for (int i = 1; i <= 21; i++)
                         {
-                            guardar.WriteLine(cas[i].nombre 
-                                + " " + cas[i].valor);
+                            for (int j = 0; j < 8; j++)
+                            {
+                                    char letra = ' ';
+
+                                    switch (j)
+                                    {
+                                        case 0: letra = 'A'; break;
+                                        case 1: letra = 'B'; break;
+                                        case 2: letra = 'C'; break;
+                                        case 3: letra = 'D'; break;
+                                        case 4: letra = 'E'; break;
+                                        case 5: letra = 'F'; break;
+                                        case 6: letra = 'G'; break;
+                                        case 7: letra = 'H'; break;
+                                    }
+                                guardar.WriteLine("Casilla " 
+                                    + letra + i
+                                    + ": " + inter.tabla[i, j].nombre
+                                    + " " + inter.tabla[i, j].valor);
+                            }
                         }
 
                         guardar.Close();
