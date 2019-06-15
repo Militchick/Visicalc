@@ -7,16 +7,18 @@ namespace Visicalc
     {
         public string nombre;
         public double valor;
+        public char tipo;
     }
 
     class HojaDeCalculo
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 25);
             const int tamanyo = 1000;
             int opcion = 4;
             int contar = 0;
-            bool guardarsino = true;
+            bool guardarsino = false;
             bool seguro = true;
             casilla[] cas = new casilla[tamanyo];
 
@@ -122,7 +124,7 @@ namespace Visicalc
                                                     Convert.ToDouble
                                                     (partes[3]);
 
-                                                Console.WriteLine(partes[2] + " " + partes[3]);
+                                                //Console.WriteLine(partes[2] + " " + partes[3]);
 
                                             }
                                         }
@@ -219,11 +221,22 @@ namespace Visicalc
                                         case 6: letra = 'G'; break;
                                         case 7: letra = 'H'; break;
                                     }
-                                guardar.WriteLine("Casilla " 
-                                    + letra + i
-                                    + ": " + inter.tabla[i, j].nombre
-                                    + " " + inter.tabla[i, j].valor);
-                            }
+                                    if(inter.tabla[i, j].valor != 0)
+                                    {
+
+                                        guardar.WriteLine("Casilla "
+                                            + letra + i
+                                            + ": " + inter.tabla[i, j].nombre
+                                            + " " + inter.tabla[i, j].valor);
+                                    }
+                                    else if(inter.tabla[i, j].nombre != null)
+                                    {
+                                        guardar.WriteLine("Casilla "
+                                            + letra + i
+                                            + ": " + inter.tabla[i, j].nombre
+                                            + " " + inter.tabla[i, j].valor);
+                                    }
+                                }
                         }
 
                         guardar.Close();
@@ -254,8 +267,6 @@ namespace Visicalc
 
                             do
                             {
-                                Console.WriteLine("Quedan datos " +
-                                    "por guardar");
                                 Console.Write("Estas seguro de que " +
                                     "quieres salir?: ");
                                 string segura = 

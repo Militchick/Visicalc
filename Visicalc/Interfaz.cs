@@ -9,6 +9,7 @@ namespace Visicalc
 
         protected bool salidainter = false;
 
+        protected int espaciocelda = 9;
         protected const int altura = 25;
         protected const int ancho = 80;
         protected int cuentaltura2 = 1;
@@ -17,9 +18,6 @@ namespace Visicalc
 
         public void Ejecutar()
         {
-
-            Console.SetWindowSize(120, 30);
-            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("A1");
             Console.ResetColor();
@@ -38,8 +36,19 @@ namespace Visicalc
 
                 Console.WriteLine();
                 Console.WriteLine("Pulsa ESC para salir de la Interfaz");
-                Console.WriteLine("Valor:" + tabla[cuentaltura2, 
-                    cuentanchura2].valor);
+                
+                if ((tabla[cuentaltura2,
+                    cuentanchura2].valor == 0) && 
+                    (tabla[cuentaltura2, cuentanchura2].nombre == null))
+                {
+                    tabla[cuentaltura2, cuentanchura2].tipo = 'V';
+                }
+
+                Console.WriteLine("Valor:" + tabla[cuentaltura2,
+                    cuentanchura2].valor + " / Nombre: " + tabla[cuentaltura2,
+                    cuentanchura2].nombre + " / Tipo: " + tabla[cuentaltura2,
+                    cuentanchura2].tipo);
+                Console.WriteLine();
             }
             while (salidainter != true);
 
@@ -109,6 +118,8 @@ namespace Visicalc
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(alt);
                         Console.ResetColor();
+                        if (alt < 10)
+                            Console.Write("_");
                     }
                     else
                     {
@@ -194,27 +205,16 @@ namespace Visicalc
 
             string letras = string.Empty;
 
-            if(cuentaltura2 < 10)
-            {
-                Console.SetCursorPosition(6 + (11 * cuentanchura2),
-                    3 + cuentaltura2);
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.Write("         ");
-                Console.SetCursorPosition(6 + (11 * cuentanchura2),
-                    3 + cuentaltura2);
-            }
-            else
+            if (cuentanchura2 < 8)
             {
                 Console.SetCursorPosition(7 + (11 * cuentanchura2),
-                    3 + cuentaltura2);
+                3 + cuentaltura2);
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write("         ");
                 Console.SetCursorPosition(7 + (11 * cuentanchura2),
                     3 + cuentaltura2);
             }
-
             ConsoleKeyInfo TeclaLeida = Console.ReadKey();
 
             if (TeclaLeida.Key == ConsoleKey.DownArrow)
@@ -222,6 +222,10 @@ namespace Visicalc
                 if(cuentaltura2 < 21)
                 {
                     cuentaltura2++;
+                    if (tabla[cuentaltura2, cuentanchura2].tipo == 'V')
+                    {
+                        espaciocelda = 9;
+                    }
                 }
 
                 Console.ResetColor();
@@ -231,6 +235,10 @@ namespace Visicalc
                 if (cuentaltura2 > 1)
                 {
                     cuentaltura2--;
+                    if (tabla[cuentaltura2, cuentanchura2].tipo == 'V')
+                    {
+                        espaciocelda = 9;
+                    }
                 }
 
                 Console.ResetColor();
@@ -240,15 +248,29 @@ namespace Visicalc
                 if (cuentanchura2 > 0)
                 {
                     cuentanchura2--;
+                    if (tabla[cuentaltura2, cuentanchura2].tipo == 'V')
+                    {
+                        espaciocelda = 9;
+                    }
+                    
                 }
 
                 Console.ResetColor();
             }
             else if (TeclaLeida.Key == ConsoleKey.RightArrow)
             {
-                if (cuentanchura2 < 8)
+                if (cuentanchura2 < 7)
                 {
                     cuentanchura2++;
+                    if(tabla[cuentaltura2, cuentanchura2].tipo == 'V')
+                    {
+                        espaciocelda = 9;
+                    }/*
+                    else
+                    {
+                        espaciocelda = 9 - tabla[cuentaltura2,
+                            cuentanchura2].nombre.Length;
+                    }*/
                 }
 
                 Console.ResetColor();
@@ -269,7 +291,37 @@ namespace Visicalc
                 || (TeclaLeida.Key == ConsoleKey.D6)
                 || (TeclaLeida.Key == ConsoleKey.D7)
                 || (TeclaLeida.Key == ConsoleKey.D8)
-                || (TeclaLeida.Key == ConsoleKey.D9))
+                || (TeclaLeida.Key == ConsoleKey.D9)
+                || (TeclaLeida.Key == ConsoleKey.A)
+                || (TeclaLeida.Key == ConsoleKey.B)
+                || (TeclaLeida.Key == ConsoleKey.C)
+                || (TeclaLeida.Key == ConsoleKey.D)
+                || (TeclaLeida.Key == ConsoleKey.E)
+                || (TeclaLeida.Key == ConsoleKey.F)
+                || (TeclaLeida.Key == ConsoleKey.G)
+                || (TeclaLeida.Key == ConsoleKey.H)
+                || (TeclaLeida.Key == ConsoleKey.I)
+                || (TeclaLeida.Key == ConsoleKey.J)
+                || (TeclaLeida.Key == ConsoleKey.K)
+                || (TeclaLeida.Key == ConsoleKey.L)
+                || (TeclaLeida.Key == ConsoleKey.M)
+                || (TeclaLeida.Key == ConsoleKey.N)
+                || (TeclaLeida.Key == ConsoleKey.O)
+                || (TeclaLeida.Key == ConsoleKey.P)
+                || (TeclaLeida.Key == ConsoleKey.Q)
+                || (TeclaLeida.Key == ConsoleKey.R)
+                || (TeclaLeida.Key == ConsoleKey.S)
+                || (TeclaLeida.Key == ConsoleKey.T)
+                || (TeclaLeida.Key == ConsoleKey.U)
+                || (TeclaLeida.Key == ConsoleKey.V)
+                || (TeclaLeida.Key == ConsoleKey.W)
+                || (TeclaLeida.Key == ConsoleKey.X)
+                || (TeclaLeida.Key == ConsoleKey.Y)
+                || (TeclaLeida.Key == ConsoleKey.Z)
+                || (TeclaLeida.Key == ConsoleKey.Add)
+                || (TeclaLeida.Key == ConsoleKey.Subtract)
+                || (TeclaLeida.Key == ConsoleKey.Multiply)
+                || (TeclaLeida.Key == ConsoleKey.Divide))
             {
                 IntroduceValor(TeclaLeida);
             }
@@ -321,44 +373,534 @@ namespace Visicalc
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
-            double valorinicial = 0;
+            string valorinicial = string.Empty;
+            double valorinicialdoble = 0;
 
             switch (PrimerValor.Key)
             {
-                case ConsoleKey.D0: valorinicial = 0; break;
-                case ConsoleKey.D1: valorinicial = 1; break;
-                case ConsoleKey.D2: valorinicial = 2; break;
-                case ConsoleKey.D3: valorinicial = 3; break;
-                case ConsoleKey.D4: valorinicial = 4; break;
-                case ConsoleKey.D5: valorinicial = 5; break;
-                case ConsoleKey.D6: valorinicial = 6; break;
-                case ConsoleKey.D7: valorinicial = 7; break;
-                case ConsoleKey.D8: valorinicial = 8; break;
-                case ConsoleKey.D9: valorinicial = 9; break;
+                case ConsoleKey.D0: valorinicial = "0";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D1: valorinicial = "1";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D2: valorinicial = "2";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D3: valorinicial = "3";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D4: valorinicial = "4";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D5: valorinicial = "5";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D6: valorinicial = "6";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D7: valorinicial = "7";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D8: valorinicial = "8";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D9: valorinicial = "9";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor 
+                        = valorinicialdoble;
+                    break;
+
+                case ConsoleKey.A: valorinicial = "A";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.B: valorinicial = "B";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.C: valorinicial = "C";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.D: valorinicial = "D";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.E: valorinicial = "E";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.F: valorinicial = "F";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.G: valorinicial = "G";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.H: valorinicial = "H";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.I: valorinicial = "I";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.J: valorinicial = "J";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.K: valorinicial = "K";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.L: valorinicial = "L";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.M: valorinicial = "M";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.N: valorinicial = "N";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.O: valorinicial = "O";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.P: valorinicial = "P";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Q: valorinicial = "Q";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.R: valorinicial = "R";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.S: valorinicial = "S";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.T: valorinicial = "T";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.U: valorinicial = "U";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.V: valorinicial = "V";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.W: valorinicial = "W";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.X: valorinicial = "X";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Y: valorinicial = "Y";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Z: valorinicial = "Z";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Spacebar: valorinicial = " ";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Add: valorinicial = "+";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Subtract: valorinicial = "-";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Multiply: valorinicial = "*";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
+                case ConsoleKey.Divide: valorinicial = "/";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
             }
 
-            tabla[cuentaltura2, cuentanchura2].valor = valorinicial;
+            char[] cara8 = new char[8];
+            for (int i = 0; i < 8; i++)
+            {
+                ConsoleKeyInfo cki = Console.ReadKey();
 
-            //He usado ReadLine asi que, 
-            //guardar el valor tras pulsar las flechas
-            //Es imposible
-            string valorfinal = Console.ReadLine();
+                if (cki.Key != ConsoleKey.Enter)
+                {
+                    cara8[i] = Convert.ToChar(cki.KeyChar);
+                }
+                else
+                {
+                    i = 8;
+                }
+            }
+            string valorfinal = new string(cara8);
 
             if (valorfinal != null)
             {
                 try
                 {
-                    double valorfinaldoble = Convert.ToInt32(valorfinal);
-                    valorfinaldoble = double.Parse(valorinicial.ToString()
-                        + valorfinaldoble.ToString());
+                    string valorfinalcadena = valorinicial + valorfinal;
+                    double totalp1 = 0;
+                    double totalp2 = 0;
+                    string sololetras = string.Empty;
+                    bool suma = false;
+                    bool resta = false;
+                    bool multiplicar = false;
+                    bool dividir = false;
 
-                    string cortara9 = Convert.ToString(valorfinaldoble);
-                    //int contadora9 = 0;
-                    double cortado = 0;
 
-                    if(cortara9.Length < 10)
+                    foreach (char c in valorfinalcadena)
                     {
-                        cortado = double.Parse(cortara9.ToString());
+                        switch (c)
+                        {
+                            case '0':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "0");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "0");
+                                }
+                                break;
+                            case '1':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "1");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "1");
+                                }
+                                break;
+                            case '2':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "2");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "2");
+                                }
+                                break;
+                            case '3':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "3");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "3");
+                                }
+                                break;
+                            case '4':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "4");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "4");
+                                }
+                                break;
+                            case '5':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "5");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "5");
+                                }
+                                break;
+                            case '6':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "6");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "6");
+                                }
+                                break;
+                            case '7':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "7");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "7");
+                                }
+                                break;
+                            case '8':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "8");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "8");
+                                }
+                                break;
+                            case '9':
+                                if ((suma == false) && (resta == false)
+                                    && (multiplicar == false)
+                                    && (dividir == false))
+                                {
+                                    totalp1 = double.Parse(totalp1.ToString() + "9");
+                                }
+                                else
+                                {
+                                    totalp2 = double.Parse(totalp2.ToString() + "9");
+                                }
+                                break;
+
+                            case 'A':
+                            case 'a':
+                                sololetras = sololetras + "A"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'B':
+                            case 'b':
+                                sololetras = sololetras + "B"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'C':
+                            case 'c':
+                                sololetras = sololetras + "C"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'D':
+                            case 'd':
+                                sololetras = sololetras + "D"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'E':
+                            case 'e':
+                                sololetras = sololetras + "E"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'F':
+                            case 'f':
+                                sololetras = sololetras + "F"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'G':
+                            case 'g':
+                                sololetras = sololetras + "G"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'H':
+                            case 'h':
+                                sololetras = sololetras + "H"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'I':
+                            case 'i':
+                                sololetras = sololetras + "I"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'J':
+                            case 'j':
+                                sololetras = sololetras + "J"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'K':
+                            case 'k':
+                                sololetras = sololetras + "K"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'L':
+                            case 'l':
+                                sololetras = sololetras + "L"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'M':
+                            case 'm':
+                                sololetras = sololetras + "M"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'N':
+                            case 'n':
+                                sololetras = sololetras + "N"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'O':
+                            case 'o':
+                                sololetras = sololetras + "O"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'P':
+                            case 'p':
+                                sololetras = sololetras + "P"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'Q':
+                            case 'q':
+                                sololetras = sololetras + "Q"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'R':
+                            case 'r':
+                                sololetras = sololetras + "R"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'S':
+                            case 's':
+                                sololetras = sololetras + "S"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'T':
+                            case 't':
+                                sololetras = sololetras + "T"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'U':
+                            case 'u':
+                                sololetras = sololetras + "U"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'V':
+                            case 'v':
+                                sololetras = sololetras + "V"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'W':
+                            case 'w':
+                                sololetras = sololetras + "W"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre 
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'X':
+                            case 'x':
+                                sololetras = sololetras + "X"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'Y':
+                            case 'y':
+                                sololetras = sololetras + "Y"; 
+                                tabla[cuentaltura2, cuentanchura2].nombre
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case 'Z':
+                            case 'z':
+                                sololetras = sololetras + "Z";
+                                tabla[cuentaltura2, cuentanchura2].nombre
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case ' ':
+                                sololetras = sololetras + " ";
+                                tabla[cuentaltura2, cuentanchura2].nombre
+                                    = sololetras;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                                break;
+                            case '+': suma = true;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                                break;
+                            case '-': resta = true;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                                break;
+                            case '*': multiplicar = true;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                                break;
+                            case '/': dividir = true;
+                                tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                                break;
+                        }
+                    }
+
+                    double cortado = 0;
+                    if(suma == true)
+                    {
+                        cortado = totalp1 + totalp2;
+                        tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                    }
+                    else if(multiplicar == true)
+                    {
+                        cortado = totalp1 * totalp2;
+                        tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                    }
+                    else if(resta == true)
+                    {
+                        if(totalp1 > totalp2)
+                        {
+                            cortado = totalp1 - totalp2;
+                            tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                        }
+                        else
+                        {
+                            cortado = totalp2 - totalp1;
+                            tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                        }
+                    }
+                    else if (dividir == true)
+                    {
+                        if (totalp1 > totalp2)
+                        {
+                            cortado = totalp1 / totalp2;
+                            tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                        }
+                        else
+                        {
+                            cortado = totalp2 / totalp1;
+                            tabla[cuentaltura2, cuentanchura2].tipo = 'F';
+                        }
+                    }
+                    else if(totalp2 == 0)
+                    {
+                        cortado = totalp1;
+                        tabla[cuentaltura2, cuentanchura2].tipo = 'N';
+                    }
+
+
+                    if ((tabla[cuentaltura2, cuentanchura2].nombre != null)
+                        && (suma != true) && (resta != true) && 
+                        (multiplicar != true) && (dividir != true))
+                    {
+                        tabla[cuentaltura2, cuentanchura2].tipo = 'T';
+                        cortado = 0;
                     }
 
                     tabla[cuentaltura2, cuentanchura2].valor = cortado;
