@@ -262,7 +262,6 @@ namespace Visicalc
 
                         if(guardarsino == false)
                         {
-
                             bool bucle = true;
 
                             do
