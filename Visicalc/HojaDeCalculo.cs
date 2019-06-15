@@ -1,5 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
+
+// V 0.04b, 15-06-2019: 
+//     Nacho, Anulado cargado y guardado, que usaban datos
+//     públicos
 
 namespace Visicalc
 {
@@ -117,13 +121,13 @@ namespace Visicalc
                                         {
                                             for (int j = 0; j < 8; j++)
                                             {
-
+                                                /*
                                                 inter.tabla[i, j].nombre = 
                                                     partes[2];
                                                 inter.tabla[i, j].valor =
                                                     Convert.ToDouble
                                                     (partes[3]);
-
+                                                */
                                                 //Console.WriteLine(partes[2] + " " + partes[3]);
 
                                             }
@@ -198,6 +202,7 @@ namespace Visicalc
 
                     try
                     {
+                            /*
                         Console.Write("Nombre del fichero a guardar?: ");
                         string nombreguardar = Console.ReadLine();
 
@@ -240,7 +245,7 @@ namespace Visicalc
                         }
 
                         guardar.Close();
-
+                        */
                         guardarsino = true;
                         seguro = false;
 
