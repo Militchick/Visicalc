@@ -1,36 +1,64 @@
-﻿using System;
-using System.Threading;
+using System;
+//using System.Threading;
+
+// V 0.04b, 15-06-2019: 
+//     Nacho, Ejemplo de cómo mover con las flechas e introducir datos
+//     en cada casilla, con interfaz más parecido a Visicalc
 
 namespace Visicalc
 {
 
     class Interfaz
     {
+        //protected bool salidainter = false;
 
-        protected bool salidainter = false;
+        // protected int espaciocelda = 9;
+        // protected const int altura = 25;
+        // protected const int ancho = 80;
+        // protected int cuentaltura2 = 1;
+        // protected int cuentanchura2 = 0;
+        // public casilla[,] tabla = new casilla[altura, ancho];
 
-        protected int espaciocelda = 9;
-        protected const int altura = 25;
-        protected const int ancho = 80;
-        protected int cuentaltura2 = 1;
-        protected int cuentanchura2 = 0;
-        public casilla[,] tabla = new casilla[altura, ancho];
+        const int ANCHO = 8;
+        const int ALTO = 21;
+        protected casilla[,] datos;
+
+        protected string casillaActual;
+        protected int filaActual, columnaActual;
+        protected bool terminado;
+
+        public Interfaz()
+        {
+            casillaActual = "A1";
+            filaActual = 0;
+            columnaActual = 0;
+            datos = new casilla[ANCHO, ALTO];
+
+            terminado = false;
+        }
 
         public void Ejecutar()
         {
+            /*
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("A1");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine();
 
-            TablasPreparar();
+            //TablasPreparar();
 
             Console.WriteLine();
             Console.WriteLine("Pulsa ESC para salir de la Interfaz");
+            */
 
+            
             do
             {
+                DibujarPantalla();
+                EsperarYProcesarTecla();
+
+                /*
                 CambiarTecla();
                 TablasPreparar();
 
@@ -51,9 +79,119 @@ namespace Visicalc
                 Console.WriteLine();
             }
             while (salidainter != true);
-
+            */
+            }
+            while (!terminado);
         }
 
+
+        // Dibuja todo el interfaz: líneas de información y cuadrícula
+        protected void DibujarPantalla()
+        {
+            casillaActual = "" +
+                Convert.ToChar('A' + columnaActual)+
+                (filaActual + 1);
+            Console.Clear();
+            Console.WriteLine(casillaActual+ "  "+ 
+                datos[columnaActual, filaActual].nombre, "az");
+            Console.WriteLine("Pulse ESC para el menú");
+            // Cabeceras de las columnas, con anchura 9
+            for (char columna = 'A'; columna <= 'H'; columna++)
+            {
+                Escribir(3 + (columna-'A') * 9, 2, 
+                    AlinearIzquierda(columna+"", 9), "inv");
+            }
+            // Comienzo de las filas, con anchura 3
+            for (int fila = 1; fila <= 21; fila++)
+            {
+                Escribir(0, fila+2, AlinearDerecha(fila, 3), "inv");
+            }
+
+            // Datos de las casillas
+            for (int fila = 0; fila <= 20; fila++)
+                for (int columna = 0; columna < 8; columna++)
+                {
+                    Escribir(3 + columna * 9, fila + 3,
+                        datos[columna, fila].nombre);
+                }
+
+            // Y nos colocamos en la casilla actual
+            Console.SetCursorPosition(3 + columnaActual * 9, 3 + filaActual);
+
+            Console.ResetColor();
+        }
+
+        protected void EsperarYProcesarTecla()
+        {
+            ConsoleKeyInfo tecla = Console.ReadKey(true);
+
+            if (tecla.Key == ConsoleKey.Escape) { terminado = true; return; }
+            else if (tecla.Key == ConsoleKey.RightArrow && columnaActual < ANCHO - 1)
+                columnaActual++;
+            else if (tecla.Key == ConsoleKey.LeftArrow && columnaActual > 0)
+                columnaActual--;
+            else if (tecla.Key == ConsoleKey.DownArrow && filaActual < ALTO - 1)
+                filaActual++;
+            else if (tecla.Key == ConsoleKey.UpArrow && filaActual > 0)
+                filaActual--;
+            else ProcesarLetra(tecla.KeyChar);
+        }
+
+        protected void ProcesarLetra(char letra)
+        {
+            // TO DO: Falta comprobar si es letra o número
+            // Y limitar longitud en los números
+            datos[columnaActual, filaActual].nombre += letra;
+        }
+
+        // ---------- Funciones auxiliares ------------
+
+        // Función auxiliar para escribir en ciertas coordenadas
+        // Colores permitidos por ahora: 
+        // "bl" (y valor por defecto) = blanco sobre negro
+        // "az" = azul (cyan) sobre negro
+        // "inv" = invertido (negro sobre gris)
+        protected void Escribir(int x, int y, string texto, string color="bl")
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            if (color == "az")
+                Console.ForegroundColor = ConsoleColor.White;
+            else if (color == "inv")
+            {
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.Gray;
+            }
+            Console.SetCursorPosition(x, y);
+            Console.Write(texto);
+        }
+
+        // Convierte un número en un string, alineado hacia
+        // la derecha, rellenando con espacios hasta una cierta
+        // longitud
+        protected string AlinearDerecha(int num, int cifras)
+        {
+            string resultado = num.ToString();
+            while (resultado.Length < cifras)
+                resultado = " " + resultado;
+            return resultado;
+        }
+
+        // Completa un string hasta una cierta longitud, 
+        // rellenando con espacios al final
+        protected string AlinearIzquierda(string texto, int letras)
+        {
+            while (texto.Length < letras)
+                texto += " ";
+            return texto;
+        }
+
+
+        // ------------------------------------
+        // Aquí está la estructura anterior
+
+
+        /*
         //Se preparan las tablas, añadiendo
         //los limites de anchura y las anchuras de celdas
 
@@ -146,12 +284,7 @@ namespace Visicalc
                                     Console.Write(columna);
                                     Console.ResetColor();
                                     columna++;
-                                }/*
-                                else
-                                {
-                                    columna = 'A';
-                                    Console.Write(columna);
-                                }*/
+                                }
                             }
 
                             Console.Write("_");
@@ -172,12 +305,7 @@ namespace Visicalc
                                     Console.Write(columna);
                                     Console.ResetColor();
                                     columna++;
-                                }/*
-                                else
-                                {
-                                    columna = 'A';
-                                    Console.Write(columna);
-                                }*/
+                                }
 
                             }
 
@@ -265,12 +393,7 @@ namespace Visicalc
                     if(tabla[cuentaltura2, cuentanchura2].tipo == 'V')
                     {
                         espaciocelda = 9;
-                    }/*
-                    else
-                    {
-                        espaciocelda = 9 - tabla[cuentaltura2,
-                            cuentanchura2].nombre.Length;
-                    }*/
+                    }
                 }
 
                 Console.ResetColor();
@@ -334,12 +457,7 @@ namespace Visicalc
                 if ((primeraletra >= 'A') && (primeraletra < 'H'))
                 {
                     primeraletra++;
-                }/*
-                else
-                {
-                    primeraletra = 'A';
-                    letras += primeraletra;
-                }*/
+                }
             }
 
             letras += primeraletra;
@@ -359,12 +477,7 @@ namespace Visicalc
             Console.WriteLine();
             Console.WriteLine();
             
-            /*
-            if ((TeclaPulsada(TECLA_INT)) || (TeclaPulsada(TECLA_ESP)))
-            {
 
-            }
-            */
 
         }
 
@@ -992,6 +1105,6 @@ namespace Visicalc
                     tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
                     sololetras = valorinicial; break;
             }
-        }
+        }*/
     }
 }
