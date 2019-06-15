@@ -323,6 +323,7 @@ namespace Visicalc
                 || (TeclaLeida.Key == ConsoleKey.Multiply)
                 || (TeclaLeida.Key == ConsoleKey.Divide))
             {
+                tabla[cuentaltura2, cuentanchura2].tipo = 'V';
                 IntroduceValor(TeclaLeida);
             }
 
@@ -376,122 +377,9 @@ namespace Visicalc
             string valorinicial = string.Empty;
             double valorinicialdoble = 0;
 
-            switch (PrimerValor.Key)
-            {
-                case ConsoleKey.D0: valorinicial = "0";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D1: valorinicial = "1";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D2: valorinicial = "2";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D3: valorinicial = "3";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D4: valorinicial = "4";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D5: valorinicial = "5";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D6: valorinicial = "6";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D7: valorinicial = "7";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D8: valorinicial = "8";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-                case ConsoleKey.D9: valorinicial = "9";
-                    valorinicialdoble = Convert.ToDouble(valorinicial);
-                    tabla[cuentaltura2, cuentanchura2].valor 
-                        = valorinicialdoble;
-                    break;
-
-                case ConsoleKey.A: valorinicial = "A";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.B: valorinicial = "B";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.C: valorinicial = "C";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.D: valorinicial = "D";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.E: valorinicial = "E";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.F: valorinicial = "F";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.G: valorinicial = "G";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.H: valorinicial = "H";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.I: valorinicial = "I";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.J: valorinicial = "J";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.K: valorinicial = "K";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.L: valorinicial = "L";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.M: valorinicial = "M";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.N: valorinicial = "N";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.O: valorinicial = "O";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.P: valorinicial = "P";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Q: valorinicial = "Q";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.R: valorinicial = "R";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.S: valorinicial = "S";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.T: valorinicial = "T";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.U: valorinicial = "U";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.V: valorinicial = "V";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.W: valorinicial = "W";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.X: valorinicial = "X";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Y: valorinicial = "Y";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Z: valorinicial = "Z";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Spacebar: valorinicial = " ";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Add: valorinicial = "+";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Subtract: valorinicial = "-";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Multiply: valorinicial = "*";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-                case ConsoleKey.Divide: valorinicial = "/";
-                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial; break;
-            }
+            string sololetras = string.Empty;
+            primercaraleido(PrimerValor, valorinicial, 
+                valorinicialdoble, sololetras);
 
             char[] cara8 = new char[8];
             for (int i = 0; i < 8; i++)
@@ -513,16 +401,15 @@ namespace Visicalc
             {
                 try
                 {
-                    string valorfinalcadena = valorinicial + valorfinal;
-                    double totalp1 = 0;
+                    string valorfinalcadena = 
+                        tabla[cuentaltura2, cuentanchura2].nombre + valorfinal;
+                    double totalp1 = tabla[cuentaltura2, cuentanchura2].valor;
                     double totalp2 = 0;
-                    string sololetras = string.Empty;
                     bool suma = false;
                     bool resta = false;
                     bool multiplicar = false;
                     bool dividir = false;
-
-
+                    
                     foreach (char c in valorfinalcadena)
                     {
                         switch (c)
@@ -912,6 +799,199 @@ namespace Visicalc
                 Console.ResetColor();
             }
 
+        }
+
+        protected void primercaraleido (ConsoleKeyInfo PrimerValor, 
+            string valorinicial, double valorinicialdoble, string sololetras)
+        {
+            switch (PrimerValor.Key)
+            {
+                case ConsoleKey.D0:
+                    valorinicial = "0";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D1:
+                    valorinicial = "1";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D2:
+                    valorinicial = "2";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D3:
+                    valorinicial = "3";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D4:
+                    valorinicial = "4";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D5:
+                    valorinicial = "5";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D6:
+                    valorinicial = "6";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D7:
+                    valorinicial = "7";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D8:
+                    valorinicial = "8";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+                case ConsoleKey.D9:
+                    valorinicial = "9";
+                    valorinicialdoble = Convert.ToDouble(valorinicial);
+                    tabla[cuentaltura2, cuentanchura2].valor
+                        = valorinicialdoble;
+                    break;
+
+                case ConsoleKey.A:
+                    valorinicial = "A";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.B:
+                    valorinicial = "B";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.C:
+                    valorinicial = "C";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.D:
+                    valorinicial = "D";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.E:
+                    valorinicial = "E";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.F:
+                    valorinicial = "F";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.G:
+                    valorinicial = "G";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.H:
+                    valorinicial = "H";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.I:
+                    valorinicial = "I";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.J:
+                    valorinicial = "J";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.K:
+                    valorinicial = "K";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.L:
+                    valorinicial = "L";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.M:
+                    valorinicial = "M";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.N:
+                    valorinicial = "N";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.O:
+                    valorinicial = "O";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.P:
+                    valorinicial = "P";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Q:
+                    valorinicial = "Q";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.R:
+                    valorinicial = "R";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.S:
+                    valorinicial = "S";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.T:
+                    valorinicial = "T";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.U:
+                    valorinicial = "U";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.V:
+                    valorinicial = "V";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.W:
+                    valorinicial = "W";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.X:
+                    valorinicial = "X";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Y:
+                    valorinicial = "Y";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Z:
+                    valorinicial = "Z";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Spacebar:
+                    valorinicial = " ";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Add:
+                    valorinicial = "+";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Subtract:
+                    valorinicial = "-";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Multiply:
+                    valorinicial = "*";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+                case ConsoleKey.Divide:
+                    valorinicial = "/";
+                    tabla[cuentaltura2, cuentanchura2].nombre = valorinicial;
+                    sololetras = valorinicial; break;
+            }
         }
     }
 }
