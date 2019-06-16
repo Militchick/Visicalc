@@ -1,0 +1,4 @@
+Casilla A1:  23
+Casilla A2: VALORES 0
+Casilla A3: DETEXTO 0
+Casilla A4: DEPRUEBA 0
